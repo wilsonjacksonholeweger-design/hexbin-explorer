@@ -11,7 +11,7 @@ int main() {
 
     FILE *arquivo = fopen(nome_arquivo, "rb");
     if (!arquivo) {
-        printf("Erro: Nao foi possivel abrir o arquivo '%s'.\n", nome_arquivo);
+        printf("Erro ao abrir arquivo '%s'.\n", nome_arquivo);
         return 1;
     }
 
@@ -22,7 +22,6 @@ int main() {
         return 1;
     }
 
-    // Apenas UMA declaração de buffer
     unsigned char buffer[16];
     long offset = 0;
     size_t bytes_lidos;
@@ -30,7 +29,6 @@ int main() {
     fprintf(saida, "Offset   | Hexadecimal\n");
     fprintf(saida, "------------------------\n");
 
-    // Lê o arquivo em blocos de 16 bytes
     while ((bytes_lidos = fread(buffer, 1, 16, arquivo)) > 0) {
         fprintf(saida, "%08lX | ", offset);
 
@@ -45,6 +43,6 @@ int main() {
     fclose(arquivo);
     fclose(saida);
 
-    printf("\nAnalise finalizada. Resultados salvos em 'saida.txt'.\n");
+    printf("Analise finalizada. Resultados salvos em 'saida.txt'.\n");
     return 0;
 }
