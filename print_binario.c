@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "arquivo.h"
 
 int main() {
     char nome_arquivo[256];
@@ -15,7 +16,12 @@ int main() {
         return 1;
     }
 
-    FILE *saida = fopen("saida.txt", "w");
+    char nome_saida[256];
+
+    criar_pasta_output();
+    gerar_nome_saida(nome_saida);
+
+    FILE *saida = fopen(nome_saida, "w");
     if (!saida) {
         printf("Erro ao criar arquivo de saida.\n");
         fclose(arquivo);
@@ -43,6 +49,6 @@ int main() {
     fclose(arquivo);
     fclose(saida);
 
-    printf("Analise finalizada. Resultados salvos em 'saida.txt'.\n");
+    printf("Analise finalizada. Resultados salvos em '%s'.\n", nome_saida);
     return 0;
 }
